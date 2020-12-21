@@ -1,0 +1,7 @@
+FROM python:3
+ADD {{ service_name }}.py /
+ADD requirements.txt /
+
+RUN pip install -r requirements.txt
+
+ENTRYPOINT [ "python3", "{{ service_name }}.py" ]

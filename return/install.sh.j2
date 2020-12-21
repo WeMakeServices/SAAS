@@ -1,0 +1,23 @@
+echo "[+] Creating service directory..."
+mkdir -p {{ service_name }}
+
+echo "[+] Entering service directory..."
+cd {{ service_name }}
+
+echo "[+] Creating service code..."
+curl {{ api_url }}/service > {{ service_name }}.py
+
+echo "[+] Creating license file..."
+curl {{ api_url }}/license/{{ service_name }} > LICENSE
+
+echo "[+] Creating requirements..."
+curl {{ api_url }}/requirements > requirements.txt
+
+echo "[+] Creating readme..."
+curl {{ api_url }}/readme/{{ service_name }} > README.md
+
+echo "[+] Creating dockerfile..."
+curl {{ api_url }}/dockerfile/{{ service_name }} > Dockerfile
+touch .gitignore
+
+echo "\033[0;32m[+] All done! Enjoy your Service!"

@@ -1,0 +1,23 @@
+
+from flask import Flask, request
+from flask_limiter import Limiter
+from flask_cors import CORS, cross_origin
+
+app = Flask(__name__)
+CORS(app, support_credentials=True)
+
+limiter = Limiter(
+    app,
+    key_func=lambda: request.headers.get("X-Real-Ip"),
+)
+
+
+@app.route("/sample", methods=["GET"])
+@cross_origin(support_credentials=True)
+@limiter.limit("1 per day")
+def sample():
+    return "Hello World!", 200
+
+
+if __name__ == "__main__":
+    app.run(debug=False, host="0.0.0.0")
