@@ -165,7 +165,7 @@ For a request with `service_name = sample`
 ```text
 MIT License
 
-Copyright (c) 2020 sample
+Copyright (c) 2020 Sample
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

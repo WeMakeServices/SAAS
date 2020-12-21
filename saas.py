@@ -36,7 +36,7 @@ def license(service_name):
     if " " in service_name:
         return "Bad request", 400
     return (
-        parse_templated_file("return/license.j2", service_name=service_name),
+        parse_templated_file("return/license.j2", service_name=service_name.title()),
         200,
     )
 
