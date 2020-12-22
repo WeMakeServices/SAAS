@@ -5,11 +5,12 @@ from flask_cors import CORS, cross_origin
 from jinja2 import Template
 import json
 import random
+import os
 
-with open("configuration/config.json") as f:
-    json_data = json.load(f)
+api_url = os.getenv("SAAS_API_URL")
+if api_url == None:
+    api_url = "https://saas.woohoojin.dev"
 
-api_url = json_data["api_url"]
 app = Flask(__name__)
 CORS(app, support_credentials=True)
 
@@ -17,6 +18,16 @@ limiter = Limiter(
     app,
     key_func=lambda: request.headers.get("X-Real-Ip"),
 )
+
+
+@app.route("/build", methods=["GET"])
+@limiter.limit("100 per day")
+@cross_origin(support_credentials=True)
+def service():
+    return (
+        parse_templated_file("return/build.yml.j2"),
+        200,
+    )
 
 
 @app.route("/service", methods=["GET"])

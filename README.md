@@ -359,3 +359,44 @@ flask
 flask_cors
 flask_limiter
 ```
+
+## Build
+
+**URL** : `/build`
+
+**Method** : `GET`
+
+**Auth required** : NO
+
+**Permissions required** : None
+
+**Rate limit** : 100 requests per day
+
+**Description** : Returns the boilerplate Dockerfile build job for github actions.
+
+## Success Response
+
+**Code** : `200 OK`
+
+**Content examples**
+
+```yml
+name: Build Docker Image
+
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: docker/build-push-action@v2.2.1
+```

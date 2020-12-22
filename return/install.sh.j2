@@ -18,6 +18,14 @@ curl {{ api_url }}/readme/{{ service_name }} > README.md
 
 echo "[+] Creating dockerfile..."
 curl {{ api_url }}/dockerfile/{{ service_name }} > Dockerfile
+
+echo "[+] Creating github workflow directory..."
+mkdir -p .github/workflows
+
+echo "[+] Creating CI build job..."
+curl {{ api_url }}/build > .github/workflows/build.yml
+
+echo "[+] Creating gitignore..."
 touch .gitignore
 
 echo "\033[0;32m[+] All done! Enjoy your Service!"
