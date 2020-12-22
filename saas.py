@@ -23,7 +23,7 @@ limiter = Limiter(
 @app.route("/build", methods=["GET"])
 @limiter.limit("100 per day")
 @cross_origin(support_credentials=True)
-def service():
+def build():
     return (
         parse_templated_file("return/build.yml.j2"),
         200,
